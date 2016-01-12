@@ -1,56 +1,59 @@
 # Ansible Role: Drush
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-drush.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-drush)
+[![Build Status](https://img.shields.io/travis/rwanyoike/ansible-role-drush.svg)](https://travis-ci.org/rwanyoike/ansible-role-drush) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/rwanyoike/ansible-role-drush/master/LICENSE)
 
-Installs Drush, a command line shell and scripting interface for Drupal, on any Linux or UNIX system.
+Installs and configures Drush on RHEL/CentOS ~~or Debian/Ubuntu~~.
 
 ## Requirements
 
-None.
+None
 
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    drush_install_path: /usr/local/share/drush
+```yaml
+drush_git_version: master
+drush_git_update: false
+drush_git_force_update: false
 
-The location of the entire drush installation (includes all the supporting files, as well as the `drush` executable file.
-
-    drush_path: /usr/local/bin/drush
-
-The path where drush will be installed and available to your system. Should be in your user's `$PATH` so you can run commands simply with `drush` instead of the full path.
-
-    drush_version: master
-
-The version of Drush to install (examples: `master` for the bleeding edge, `7.x`, `6.x`, `6.2.0`).
-
-    drush_keep_updated: no
-    drush_force_update: no
-
-Whether to keep Drush up-to-date with the latest revision of the branch specified by `drush_version`, and whether to force the update (e.g. overwrite local modifications to the drush repository).
-
-    drush_composer_cli_options: "--prefer-source --no-interaction"
-
-These options are the safest for avoiding GitHub API rate limits when installing Drush, and can be very helpful when working on dependencies/installation, but builds can be sped up substantially by changing the first option to --prefer-dist.
+drush_install_dir: /usr/local/share/drush
+drush_exec: /usr/local/bin/drush
+# These options are the safest for avoiding GitHub API rate limits, but builds
+# can be sped up substantially by changing to --prefer-dist.
+drush_composer_cli_options: --prefer-source --no-interaction
+```
 
 ## Dependencies
 
-  - geerlingguy.git (Installs Git).
-  - geerlingguy.php (Installs PHP).
-  - geerlingguy.composer (Installs Composer).
+- rwanyoike.git (https://github.com/rwanyoike/ansible-role-git)
+- rwanyoike.composer (https://github.com/rwanyoike/ansible-role-composer)
 
 ## Example Playbook
 
-    - hosts: servers
-      roles:
-        - { role: geerlingguy.drush }
+```yaml
+- hosts: servers
 
-After the playbook runs, the `drush` command will be accessible from normal system accounts.
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - role: rwanyoike.drush
+```
+
+Inside `vars/main.yml`:
+
+```yaml
+drush_composer_cli_options: --prefer-dist --no-interaction
+
+# ... etc ...
+```
 
 ## License
 
-MIT / BSD
+MIT
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+- This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+- This role was forked in 2015 by [Raymond Wanyoike](https://github.com/rwanyoike).
