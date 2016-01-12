@@ -2,30 +2,17 @@
 - name: Clone Drush from GitHub.
   git:
     repo: https://github.com/drush-ops/drush.git
-    dest: "{{ drush_install_path }}"
-    version: "{{ drush_version }}"
-    update: "{{ drush_keep_updated }}"
-    force: "{{ drush_force_update }}"
+    dest: "{{ drush_install_dir }}"
+    version: "{{ drush_git_version }}"
+    update: "{{ drush_git_update }}"
+    force: "{{ drush_git_force_update }}"
   register: drush_clone
 
-- name: Check for composer.json
-  stat:
-    path: "{{ drush_install_path }}/composer.json"
-  register: drush_composer
-
-- name: Install Drush dependencies with Composer.
+- name: Install Drush dependencies.
   shell: >
-    {{ composer_path }} install {{ drush_composer_cli_options }}
-    chdir={{ drush_install_path }}
-  when: drush_clone.changed and drush_composer.stat.exists
+    {{ composer_exec }} install {{ drush_composer_cli_options }}
+    chdir={{ drush_install_dir }}
+  when: drush_clone.changed
 
-- name: Create drush symlink.
-  file:
-    src: "{{ drush_install_path }}/drush"
-    dest: "{{ drush_path }}"
-    state: link
-
-- name: Run drush to finish setting it up.
-  command: "{{ drush_path }}"
-  register: drush_result
-  changed_when: "'Execute a drush command' not in drush_result.stdout"
+- name: Create Drush exec link.
+  file: src={{ drush_install_dir }}/drush dest={{ drush_exec }} state=link
