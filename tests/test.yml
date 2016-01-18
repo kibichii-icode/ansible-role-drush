@@ -2,7 +2,6 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - rwanyoike.php
-    - rwanyoike.composer
     - rwanyoike.git
+    - rwanyoike.composer
     - ansible-role-drush

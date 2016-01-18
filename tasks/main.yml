@@ -1,5 +1,5 @@
 ---
-- name: Clone Drush from GitHub.
+- name: clone drush from github
   git:
     repo: https://github.com/drush-ops/drush.git
     dest: "{{ drush_install_dir }}"
@@ -8,11 +8,11 @@
     force: "{{ drush_git_force_update }}"
   register: drush_clone
 
-- name: Install Drush dependencies.
+- name: install drush dependencies
   shell: >
     {{ composer_exec }} install {{ drush_composer_cli_options }}
     chdir={{ drush_install_dir }}
   when: drush_clone.changed
 
-- name: Create Drush exec link.
+- name: create drush exec link
   file: src={{ drush_install_dir }}/drush dest={{ drush_exec }} state=link
