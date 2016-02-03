@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - rwanyoike.git
-  - rwanyoike.composer
+  - ansible-role-git
+  - ansible-role-composer

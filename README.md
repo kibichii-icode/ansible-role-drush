@@ -1,6 +1,6 @@
 # Ansible Role: Drush
 
-[![Build Status](https://img.shields.io/travis/rwanyoike/ansible-role-drush.svg)](https://travis-ci.org/rwanyoike/ansible-role-drush) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/rwanyoike/ansible-role-drush/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/thestarkenya/ansible-role-drush.svg)](https://travis-ci.org/thestarkenya/ansible-role-drush) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/thestarkenya/ansible-role-drush/master/LICENSE)
 
 Installs and configures Drush on RHEL/CentOS ~~or Debian/Ubuntu~~.
 
@@ -26,8 +26,8 @@ drush_composer_cli_options: --prefer-source --no-interaction
 
 ## Dependencies
 
-- rwanyoike.git (https://github.com/rwanyoike/ansible-role-git)
-- rwanyoike.composer (https://github.com/rwanyoike/ansible-role-composer)
+- ansible-role-git (https://github.com/thestarkenya/ansible-role-git)
+- ansible-role-composer (https://github.com/thestarkenya/ansible-role-composer)
 
 ## Example Playbook
 
@@ -38,7 +38,7 @@ drush_composer_cli_options: --prefer-source --no-interaction
     - vars/main.yml
 
   roles:
-    - role: rwanyoike.drush
+    - role: ansible-role-drush
 ```
 
 Inside `vars/main.yml`:
@@ -52,8 +52,3 @@ drush_composer_cli_options: --prefer-dist --no-interaction
 ## License
 
 MIT
-
-## Author Information
-
-- This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
-- This role was forked in 2015 by [Raymond Wanyoike](https://github.com/rwanyoike).
